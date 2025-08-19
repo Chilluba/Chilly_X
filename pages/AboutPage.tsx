@@ -32,10 +32,12 @@ const AboutPage: React.FC = () => {
               <CVDownloadButton />
             </div>
           </div>
-          <Button variant="primary">
-            <Download className="mr-2 h-4 w-4" />
-            Download CV
-          </Button>
+          <a href="/cv.pdf" download="Salmin_Habibu_CV.pdf">
+            <Button variant="primary">
+              <Download className="mr-2 h-4 w-4" />
+              Download CV
+            </Button>
+          </a>
         </div>
       </section>
 

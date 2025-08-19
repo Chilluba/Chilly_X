@@ -41,10 +41,12 @@ const HomePage: React.FC = () => {
               <Snarky normal="Hire Me" snark="Unleash Me" />
             </Button>
           </Link>
-          <Button variant="outline">
-            <Download className="mr-2 h-4 w-4" />
-            <Snarky normal="Download CV" snark="Get The Dossier" />
-          </Button>
+          <a href="/cv.pdf" download="Salmin_Habibu_CV.pdf">
+            <Button variant="outline">
+              <Download className="mr-2 h-4 w-4" />
+              <Snarky normal="Download CV" snark="Get The Dossier" />
+            </Button>
+          </a>
         </div>
         
         <div className="flex flex-wrap justify-center gap-8 md:gap-16 font-mono text-gray-400">
