@@ -28,10 +28,12 @@ const AboutPage: React.FC = () => {
             <p><strong>Education:</strong> Diploma in Business Administration - Mwalimu Nyerere Memorial Academy (2022)</p>
             <p><strong>Location:</strong> {profile.location}</p>
           </div>
-          <Button variant="primary">
-            <Download className="mr-2 h-4 w-4" />
-            Download CV
-          </Button>
+          <a href="/cv.pdf" download="Salmin_Habibu_CV.pdf">
+            <Button variant="primary">
+              <Download className="mr-2 h-4 w-4" />
+              Download CV
+            </Button>
+          </a>
         </div>
       </section>
 
