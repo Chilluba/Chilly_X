@@ -5,6 +5,7 @@ import SkillBar from '../components/SkillBar';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import { Download } from 'lucide-react';
+import CVDownloadButton from '../components/CVDownloadButton';
 
 const AboutPage: React.FC = () => {
   const { profile, skills } = useData();
@@ -27,6 +28,9 @@ const AboutPage: React.FC = () => {
           <div className="space-y-4 text-sm mb-8">
             <p><strong>Education:</strong> Diploma in Business Administration - Mwalimu Nyerere Memorial Academy (2022)</p>
             <p><strong>Location:</strong> {profile.location}</p>
+            <div className="mt-6">
+              <CVDownloadButton />
+            </div>
           </div>
           <a href="/cv.pdf" download="Salmin_Habibu_CV.pdf">
             <Button variant="primary">
