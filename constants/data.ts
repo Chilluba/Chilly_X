@@ -6,6 +6,7 @@ import { ProjectCategory as PC } from '../types';
 export const PROFILE_DATA = {
   displayName: "Chilly_XwAgGzZ",
   fullName: "Salmin Habibu",
+  profileImageUrl: "https://picsum.photos/seed/salmin/800/1000",
   location: "Dar es Salaam, Tanzania",
   email: "salminhabibu2000@gmail.com",
   phone: "+255-692-156-182",
