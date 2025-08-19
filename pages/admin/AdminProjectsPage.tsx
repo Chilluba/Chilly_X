@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
 import Button from '../../components/ui/Button';
-import type { Project } from '../../types';
+import type { Project, ProjectLink } from '../../types';
 import { ProjectCategory } from '../../types';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import ImageUpload from '../../components/ui/ImageUpload';
@@ -14,6 +14,7 @@ const emptyProject: Omit<Project, 'id'> = {
   imageUrl: '',
   tags: [],
   roles: [],
+  links: [],
 };
 
 const AdminProjectsPage: React.FC = () => {
@@ -99,7 +100,10 @@ const AdminProjectsPage: React.FC = () => {
 
 // Sub-component for the form
 const ProjectForm: React.FC<{ project: Project; onSave: (project: Project) => void; onCancel: () => void; isNew: boolean; }> = ({ project, onSave, onCancel, isNew }) => {
-  const [formData, setFormData] = useState(project);
+  const [formData, setFormData] = useState({
+      ...project,
+      links: project.links || [],
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -117,6 +121,20 @@ const ProjectForm: React.FC<{ project: Project; onSave: (project: Project) => vo
   
   const handleImageRemove = () => {
       setFormData(prev => ({...prev, imageUrl: ''}));
+  };
+
+  const handleLinkChange = (index: number, field: keyof ProjectLink, value: string) => {
+      const newLinks = [...formData.links];
+      newLinks[index] = { ...newLinks[index], [field]: value };
+      setFormData(prev => ({ ...prev, links: newLinks }));
+  };
+
+  const handleAddLink = () => {
+      setFormData(prev => ({ ...prev, links: [...(prev.links || []), { name: '', url: '' }] }));
+  };
+
+  const handleRemoveLink = (index: number) => {
+      setFormData(prev => ({ ...prev, links: (prev.links || []).filter((_, i) => i !== index) }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -145,6 +163,49 @@ const ProjectForm: React.FC<{ project: Project; onSave: (project: Project) => vo
             onImageUpload={handleImageUpload}
             onImageRemove={handleImageRemove}
         />
+
+        <div>
+            <label className="block text-sm font-mono text-gray-400 mb-2">Project Links</label>
+            <div className="space-y-3">
+                {formData.links.map((link, index) => (
+                    <div key={index} className="flex items-end gap-2 p-3 bg-white/5 rounded-md">
+                        <div className="flex-grow">
+                            <label htmlFor={`link-name-${index}`} className="block text-xs font-mono text-gray-400 mb-1">Link Name</label>
+                            <input
+                                id={`link-name-${index}`}
+                                type="text"
+                                placeholder="e.g. Live Demo"
+                                value={link.name}
+                                onChange={(e) => handleLinkChange(index, 'name', e.target.value)}
+                                className="w-full bg-white/5 border border-white/20 p-2 text-white outline-none focus:ring-2 focus:ring-brand-accent"
+                            />
+                        </div>
+                        <div className="flex-grow">
+                            <label htmlFor={`link-url-${index}`} className="block text-xs font-mono text-gray-400 mb-1">URL</label>
+                            <input
+                                id={`link-url-${index}`}
+                                type="url"
+                                placeholder="https://..."
+                                value={link.url}
+                                onChange={(e) => handleLinkChange(index, 'url', e.target.value)}
+                                className="w-full bg-white/5 border border-white/20 p-2 text-white outline-none focus:ring-2 focus:ring-brand-accent"
+                            />
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => handleRemoveLink(index)}
+                            className="text-brand-accent hover:text-red-400 p-2 shrink-0"
+                            aria-label="Remove Link"
+                        >
+                            <Trash2 size={18} />
+                        </button>
+                    </div>
+                ))}
+                <Button type="button" variant="outline" onClick={handleAddLink} className="w-full !mt-4">
+                    <Plus className="mr-2 h-4 w-4" /> Add Link
+                </Button>
+            </div>
+        </div>
 
         <InputField label="Tags (comma-separated)" name="tags" value={formData.tags.join(', ')} onChange={handleArrayChange} />
         <InputField label="Roles (comma-separated)" name="roles" value={formData.roles.join(', ')} onChange={handleArrayChange} />

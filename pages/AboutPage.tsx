@@ -14,7 +14,7 @@ const AboutPage: React.FC = () => {
         <div className="lg:col-span-2">
           <Card className="p-0 overflow-hidden">
             <img 
-              src="https://picsum.photos/seed/salmin/800/1000" 
+              src={profile.profileImageUrl || "https://picsum.photos/seed/salmin/800/1000"}
               alt={profile.fullName}
               className="w-full h-full object-cover"
             />

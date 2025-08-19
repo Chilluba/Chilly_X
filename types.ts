@@ -32,6 +32,11 @@ export enum ProjectCategory {
   EXPERIMENTS = "Experiments"
 }
 
+export interface ProjectLink {
+  name: string;
+  url: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -41,4 +46,5 @@ export interface Project {
   imageUrl: string;
   tags: string[];
   roles: string[];
+  links?: ProjectLink[];
 }

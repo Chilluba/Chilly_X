@@ -2,6 +2,7 @@
 import React from 'react';
 import type { Project } from '../types';
 import Card from './ui/Card';
+import { Link as LinkIcon } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
@@ -23,6 +24,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 <span key={tag} className="bg-white/10 text-brand-text text-xs font-mono px-2 py-1 rounded-sm">{tag}</span>
             ))}
         </div>
+
+        {project.links && project.links.length > 0 && (
+            <div className="mt-4 pt-4 border-t border-white/10 flex flex-wrap gap-3">
+                {project.links.map((link, index) => (
+                    <a
+                        key={index}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-sm text-brand-accent hover:text-white transition-colors duration-200 bg-brand-accent/10 hover:bg-brand-accent/20 px-3 py-1 rounded-full"
+                    >
+                        <LinkIcon size={14} className="mr-2" />
+                        {link.name}
+                    </a>
+                ))}
+            </div>
+        )}
       </div>
     </Card>
   );
