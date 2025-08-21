@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSnark } from '../context/SnarkContext';
@@ -6,13 +5,15 @@ import { useData } from '../context/DataContext';
 import { useAuth } from '../context/AuthContext';
 import { Menu, X, Shield } from 'lucide-react';
 import Toggle from './ui/Toggle';
+import { useI18n } from '../context/I18nContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const navLinks = [
-  { path: '/', label: 'Home' },
-  { path: '/about', label: 'About' },
-  { path: '/work', label: 'Work' },
-  { path: '/services', label: 'Services' },
-  { path: '/contact', label: 'Contact' },
+  { path: '/', labelKey: 'nav.home' },
+  { path: '/about', labelKey: 'nav.about' },
+  { path: '/work', labelKey: 'nav.work' },
+  { path: '/services', labelKey: 'nav.services' },
+  { path: '/contact', labelKey: 'nav.contact' },
 ];
 
 const Header: React.FC = () => {
@@ -20,6 +21,7 @@ const Header: React.FC = () => {
   const { socials } = useData();
   const { isAuthenticated } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useI18n();
 
   const linkClass = ({ isActive }: { isActive: boolean }): string =>
     `flex items-center relative text-sm font-medium uppercase tracking-wider transition-colors duration-300 ${
@@ -37,12 +39,12 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex items-center space-x-6">
             {navLinks.map(link => (
               <NavLink key={link.path} to={link.path} className={linkClass}>
-                {link.label}
+                {t(link.labelKey)}
               </NavLink>
             ))}
             {isAuthenticated && (
               <NavLink to="/admin" className={linkClass}>
-                <Shield className="mr-1 h-4 w-4" /> Admin
+                <Shield className="mr-1 h-4 w-4" /> {t('nav.admin')}
               </NavLink>
             )}
           </nav>
@@ -58,6 +60,8 @@ const Header: React.FC = () => {
                 <link.icon className="w-5 h-5" />
               </a>
             ))}
+            <div className="w-px h-6 bg-white/20"></div>
+            <LanguageSwitcher size="sm" />
           </div>
 
           <div className="md:hidden flex items-center">
@@ -74,18 +78,19 @@ const Header: React.FC = () => {
           <nav className="flex flex-col items-center space-y-4 py-6">
             {navLinks.map(link => (
               <NavLink key={link.path} to={link.path} className={linkClass} onClick={() => setIsMenuOpen(false)}>
-                {link.label}
+                {t(link.labelKey)}
               </NavLink>
             ))}
              {isAuthenticated && (
               <NavLink to="/admin" className={linkClass} onClick={() => setIsMenuOpen(false)}>
-                <Shield className="mr-1 h-4 w-4" /> Admin
+                <Shield className="mr-1 h-4 w-4" /> {t('nav.admin')}
               </NavLink>
             )}
              <div className="flex items-center space-x-2 pt-4">
                 <span className="text-xs font-mono">Snark Mode:</span>
                 <Toggle checked={isSnarky} onChange={toggleSnarkMode} />
             </div>
+            <LanguageSwitcher size="sm" />
           </nav>
         </div>
       )}

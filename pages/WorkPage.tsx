@@ -4,10 +4,12 @@ import { useData } from '../context/DataContext';
 import ProjectCard from '../components/ProjectCard';
 import type { ProjectCategory } from '../types';
 import { ProjectCategory as PC } from '../types';
+import { useI18n } from '../context/I18nContext';
 
 
 const WorkPage: React.FC = () => {
   const { projects } = useData();
+  const { t, tCategory } = useI18n();
   const [activeFilter, setActiveFilter] = useState<ProjectCategory | 'All'>('All');
 
   const categories: (ProjectCategory | 'All')[] = ['All', ...Object.values(PC)];
@@ -26,16 +28,16 @@ const WorkPage: React.FC = () => {
     const inactiveClasses = "bg-white/10 text-gray-300 hover:bg-white/20";
     return (
         <button onClick={() => setActiveFilter(category)} className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}>
-            {category}
+            {tCategory(category)}
         </button>
     );
   };
 
   return (
     <div>
-      <h1 className="font-heading text-5xl text-brand-accent uppercase tracking-wider mb-4 text-center">My Work</h1>
+      <h1 className="font-heading text-5xl text-brand-accent uppercase tracking-wider mb-4 text-center">{t('work.title')}</h1>
       <p className="text-center text-gray-400 max-w-2xl mx-auto mb-10">
-        A selection of projects that showcase my skills across different creative and technical fields. Use the filters to explore.
+        {t('work.description')}
       </p>
 
       <div className="flex flex-wrap justify-center gap-2 mb-12">

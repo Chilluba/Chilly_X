@@ -2,14 +2,16 @@
 import React from 'react';
 import { useData } from '../context/DataContext';
 import Card from '../components/ui/Card';
+import { useI18n } from '../context/I18nContext';
 
 const ServicesPage: React.FC = () => {
   const { services } = useData();
+  const { t } = useI18n();
   return (
     <div>
-      <h1 className="font-heading text-5xl text-brand-accent uppercase tracking-wider mb-4 text-center">Services</h1>
+      <h1 className="font-heading text-5xl text-brand-accent uppercase tracking-wider mb-4 text-center">{t('services.title')}</h1>
       <p className="text-center text-gray-400 max-w-2xl mx-auto mb-12">
-        Leveraging a diverse skill set to bring ideas to life. Here's how I can help you and your business.
+        {t('services.tagline')}
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

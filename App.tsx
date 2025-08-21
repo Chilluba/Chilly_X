@@ -4,6 +4,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import { SnarkProvider } from './context/SnarkContext';
 import { AuthProvider } from './context/AuthContext';
 import { DataProvider } from './context/DataContext';
+import { I18nProvider } from './context/I18nContext';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -26,6 +27,7 @@ const App: React.FC = () => {
     <AuthProvider>
       <DataProvider>
         <SnarkProvider>
+          <I18nProvider>
           <HashRouter>
             <div className="flex flex-col min-h-screen bg-brand-bg-900 font-body text-brand-text">
               <Header />
@@ -54,6 +56,7 @@ const App: React.FC = () => {
               <Footer />
             </div>
           </HashRouter>
+          </I18nProvider>
         </SnarkProvider>
       </DataProvider>
     </AuthProvider>

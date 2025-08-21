@@ -1,15 +1,17 @@
 
 import React from 'react';
 import { useData } from '../context/DataContext';
+import { useI18n } from '../context/I18nContext';
 
 const Footer: React.FC = () => {
   const { socials, profile } = useData();
+  const { t } = useI18n();
   return (
     <footer className="bg-brand-bg-800 border-t border-white/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} {profile.fullName}. All Rights Reserved.
+            &copy; {new Date().getFullYear()} {profile.fullName}. {t('footer.rightsReserved')}
           </p>
           <div className="flex items-center space-x-5">
             {socials.map(link => (

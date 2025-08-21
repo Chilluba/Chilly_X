@@ -5,9 +5,11 @@ import Button from '../components/ui/Button';
 import Snarky from '../components/Snarky';
 import { useData } from '../context/DataContext';
 import { Download, Eye, Briefcase } from 'lucide-react';
+import { useI18n } from '../context/I18nContext';
 
 const HomePage: React.FC = () => {
   const { profile } = useData();
+  const { t } = useI18n();
   return (
     <div className="relative text-center flex flex-col items-center justify-center min-h-[70vh] md:-mt-16">
       <div className="absolute inset-0 halftone-bg opacity-30"></div>
@@ -32,19 +34,19 @@ const HomePage: React.FC = () => {
           <Link to="/work">
             <Button variant="primary">
               <Eye className="mr-2 h-4 w-4" />
-              <Snarky normal="View Work" snark="See My Mayhem" />
+              <Snarky normal={t('home.viewWork')} snark="See My Mayhem" />
             </Button>
           </Link>
           <Link to="/contact">
             <Button variant="secondary">
               <Briefcase className="mr-2 h-4 w-4" />
-              <Snarky normal="Hire Me" snark="Unleash Me" />
+              <Snarky normal={t('home.hireMe')} snark="Unleash Me" />
             </Button>
           </Link>
           <a href="/cv.pdf" download="Salmin_Habibu_CV.pdf">
             <Button variant="outline">
               <Download className="mr-2 h-4 w-4" />
-              <Snarky normal="Download CV" snark="Get The Dossier" />
+              <Snarky normal={t('shared.downloadCV')} snark="Get The Dossier" />
             </Button>
           </a>
         </div>
@@ -52,15 +54,15 @@ const HomePage: React.FC = () => {
         <div className="flex flex-wrap justify-center gap-8 md:gap-16 font-mono text-gray-400">
             <div className="text-center">
                 <p className="text-4xl text-brand-accent">{profile.counters.years}+</p>
-                <p className="text-sm uppercase tracking-widest">Years Creating</p>
+                <p className="text-sm uppercase tracking-widest">{t('home.yearsCreating')}</p>
             </div>
             <div className="text-center">
                 <p className="text-4xl text-brand-accent">{profile.counters.projects}</p>
-                <p className="text-sm uppercase tracking-widest">Shipped Projects</p>
+                <p className="text-sm uppercase tracking-widest">{t('home.shippedProjects')}</p>
             </div>
             <div className="text-center">
                 <p className="text-4xl text-brand-accent">{profile.counters.tools}</p>
-                <p className="text-sm uppercase tracking-widest">Tools Mastered</p>
+                <p className="text-sm uppercase tracking-widest">{t('home.toolsMastered')}</p>
             </div>
         </div>
       </div>
