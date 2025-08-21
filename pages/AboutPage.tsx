@@ -8,7 +8,7 @@ import { useI18n } from '../context/I18nContext';
 
 const AboutPage: React.FC = () => {
   const { profile, skills } = useData();
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <div className="space-y-16">
       <section className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
@@ -42,7 +42,9 @@ const AboutPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
           {skills.map(category => (
             <div key={category.category}>
-              <h3 className="font-mono text-xl text-brand-accent mb-4 border-b-2 border-brand-accent/30 pb-2">{category.category}</h3>
+              <h3 className="font-mono text-xl text-brand-accent mb-4 border-b-2 border-brand-accent/30 pb-2">
+                {lang === 'sw' && category.categorySw ? category.categorySw : category.category}
+              </h3>
               <div>
                 {category.skills.map(skill => (
                   <SkillBar key={skill.name} skill={skill} />

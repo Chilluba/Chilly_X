@@ -6,7 +6,7 @@ import { useI18n } from '../context/I18nContext';
 
 const ServicesPage: React.FC = () => {
   const { services } = useData();
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <div>
       <h1 className="font-heading text-5xl text-brand-accent uppercase tracking-wider mb-4 text-center">{t('services.title')}</h1>
@@ -20,8 +20,12 @@ const ServicesPage: React.FC = () => {
             <div className="p-4 bg-brand-primary-500/20 rounded-full mb-6">
               <service.icon className="w-10 h-10 text-brand-accent" />
             </div>
-            <h3 className="font-heading text-2xl text-brand-text tracking-wide mb-3">{service.title}</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
+            <h3 className="font-heading text-2xl text-brand-text tracking-wide mb-3">
+              {lang === 'sw' && service.titleSw ? service.titleSw : service.title}
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              {lang === 'sw' && service.descriptionSw ? service.descriptionSw : service.description}
+            </p>
           </Card>
         ))}
       </div>

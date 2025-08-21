@@ -8,17 +8,21 @@ export interface SocialLink {
 export interface Skill {
   name: string;
   proficiency: number; // 0-100
+  nameSw?: string; // Swahili name
 }
 
 export interface SkillCategory {
   category: string;
   skills: Skill[];
+  categorySw?: string; // Swahili category name
 }
 
 export interface Service {
   title: string;
   description: string;
   icon: React.ComponentType<{ className?: string }>;
+  titleSw?: string; // Swahili title
+  descriptionSw?: string; // Swahili description
 }
 
 export enum ProjectCategory {
@@ -47,4 +51,8 @@ export interface Project {
   tags: string[];
   roles: string[];
   links?: ProjectLink[];
+  titleSw?: string; // Swahili title
+  summarySw?: string; // Swahili summary
+  tagsSw?: string[]; // Swahili tags
+  rolesSw?: string[]; // Swahili roles
 }
