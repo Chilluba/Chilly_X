@@ -3,8 +3,6 @@ import React from 'react';
 import { useData } from '../context/DataContext';
 import SkillBar from '../components/SkillBar';
 import Card from '../components/ui/Card';
-import Button from '../components/ui/Button';
-import { Download } from 'lucide-react';
 import CVDownloadButton from '../components/CVDownloadButton';
 
 const AboutPage: React.FC = () => {
@@ -32,12 +30,8 @@ const AboutPage: React.FC = () => {
               <CVDownloadButton />
             </div>
           </div>
-          <a href="/cv.pdf" download="Salmin_Habibu_CV.pdf">
-            <Button variant="primary">
-              <Download className="mr-2 h-4 w-4" />
-              Download CV
-            </Button>
-          </a>
+          {/* Single Download CV button */}
+          
         </div>
       </section>
 
