@@ -9,7 +9,7 @@ import { Download, Eye, Briefcase } from 'lucide-react';
 const HomePage: React.FC = () => {
   const { profile } = useData();
   return (
-    <div className="relative text-center flex flex-col items-center justify-center min-h-[70vh] -mt-16">
+    <div className="relative text-center flex flex-col items-center justify-center min-h-[70vh] md:-mt-16">
       <div className="absolute inset-0 halftone-bg opacity-30"></div>
       <div className="relative z-10 p-4">
         <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl tracking-wider text-brand-text uppercase">
